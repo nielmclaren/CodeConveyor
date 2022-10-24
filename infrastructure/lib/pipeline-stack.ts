@@ -18,7 +18,12 @@ export class PipelineStack extends cdk.Stack {
         input: CodePipelineSource.gitHub("nielmclaren/CodeConveyor", "main", {
           authentication: SecretValue.secretsManager("CodeConveyorGithubToken"),
         }),
-        commands: ["npm ci", "npm run build", "npx cdk synth"],
+        commands: [
+          "cd infrastructure",
+          "npm ci",
+          "npm run build",
+          "npx cdk synth",
+        ],
       }),
     });
   }
