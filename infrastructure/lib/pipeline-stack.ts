@@ -1,4 +1,5 @@
 import * as cdk from "aws-cdk-lib";
+import { SecretValue } from "aws-cdk-lib";
 import {
   CodePipeline,
   CodePipelineSource,
@@ -14,7 +15,9 @@ export class PipelineStack extends cdk.Stack {
       pipelineName: "CodeConveyorPipeline",
 
       synth: new ShellStep("Synth", {
-        input: CodePipelineSource.gitHub("nielmclaren/CodeConveyor", "main"),
+        input: CodePipelineSource.gitHub("nielmclaren/CodeConveyor", "main", {
+          authentication: SecretValue.secretsManager("CodeConveyorGithubToken"),
+        }),
         commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
     });
