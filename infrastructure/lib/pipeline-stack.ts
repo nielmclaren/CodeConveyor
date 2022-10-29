@@ -6,6 +6,8 @@ import {
   ShellStep,
 } from "aws-cdk-lib/pipelines";
 import { Construct } from "constructs";
+import { REFLECT_DEV_ACCOUNT } from "./aws-accounts";
+import { CodeConveyorStage } from "./codeconveyor-stage";
 
 export class PipelineStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -27,5 +29,11 @@ export class PipelineStack extends cdk.Stack {
         primaryOutputDirectory: "infrastructure/cdk.out",
       }),
     });
+
+    pipeline.addStage(
+      new CodeConveyorStage(this, "Dev", {
+        env: { account: REFLECT_DEV_ACCOUNT, region: "us-west-2" },
+      })
+    );
   }
 }
