@@ -15,10 +15,11 @@ export class PipelineStack extends cdk.Stack {
 
     const pipeline = new CodePipeline(this, "Pipeline", {
       pipelineName: "CodeConveyorPipeline",
+      crossAccountKeys: true,
 
       synth: new ShellStep("Synth", {
         input: CodePipelineSource.gitHub("nielmclaren/CodeConveyor", "main", {
-          authentication: SecretValue.secretsManager("GithubToken"),
+          authentication: SecretValue.secretsManager("CodeConveyorGithubToken"),
         }),
         commands: [
           "cd infrastructure",
