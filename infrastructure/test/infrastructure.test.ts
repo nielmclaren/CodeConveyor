@@ -13,6 +13,7 @@ test("SQS Queue and SNS Topic Created", () => {
   );
   // THEN
 
+  // TODO When does this test actually get run?
   const template = Template.fromStack(stack);
 
   template.hasResourceProperties("AWS::SQS::Queue", {
