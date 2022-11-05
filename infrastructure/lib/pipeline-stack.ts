@@ -6,8 +6,17 @@ import {
   ShellStep,
 } from "aws-cdk-lib/pipelines";
 import { Construct } from "constructs";
-import { REFLECT_DEV_ACCOUNT } from "./aws-accounts";
+import {
+  REFLECT_DEV_ACCOUNT,
+  REFLECT_PROD_ACCOUNT,
+  REFLECT_STAGING_ACCOUNT,
+} from "./aws-accounts";
 import { CodeConveyorStage } from "./codeconveyor-stage";
+import {
+  DevEnvironmentSettings,
+  ProdEnvironmentSettings,
+  StagingEnvironmentSettings,
+} from "./environment-settings";
 
 export class PipelineStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -32,8 +41,20 @@ export class PipelineStack extends cdk.Stack {
     });
 
     pipeline.addStage(
-      new CodeConveyorStage(this, "Dev", {
+      new CodeConveyorStage(this, "Dev", new DevEnvironmentSettings(), {
         env: { account: REFLECT_DEV_ACCOUNT, region: "us-west-2" },
+      })
+    );
+
+    pipeline.addStage(
+      new CodeConveyorStage(this, "Stage", new StagingEnvironmentSettings(), {
+        env: { account: REFLECT_STAGING_ACCOUNT, region: "us-west-2" },
+      })
+    );
+
+    pipeline.addStage(
+      new CodeConveyorStage(this, "Prod", new ProdEnvironmentSettings(), {
+        env: { account: REFLECT_PROD_ACCOUNT, region: "us-west-2" },
       })
     );
   }
