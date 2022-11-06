@@ -32,7 +32,7 @@ export class CodeConveyorStack extends Stack {
       envSettings.certificateArn
     );
 
-    const restApi = new apigw.LambdaRestApi(this, "Endpoint", {
+    const restApi = new apigw.LambdaRestApi(this, "CodeConveyorApiEndpoint", {
       handler: hello,
       domainName: {
         certificate,
