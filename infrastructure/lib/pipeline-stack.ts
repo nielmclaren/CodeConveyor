@@ -32,8 +32,8 @@ export class PipelineStack extends cdk.Stack {
         }),
         commands: [
           "cd infrastructure",
-          "npm ci",
-          "npm run build",
+          "yarn install --frozen-lockfile",
+          "yarn build",
           "npx cdk synth",
         ],
         primaryOutputDirectory: "infrastructure/cdk.out",
