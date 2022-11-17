@@ -61,9 +61,6 @@ export class CodeConveyorStack extends Stack {
       this,
       "AliasRecord", // Associate with Lambda code in codeconveyor-stack.AliasRecord.ts.
       {
-        bundling: {
-          externalModules: ["aws-sdk"],
-        },
         initialPolicy: [
           new aws_iam.PolicyStatement({
             actions: ["sts:AssumeRole"],
