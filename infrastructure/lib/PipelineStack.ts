@@ -10,13 +10,13 @@ import {
   REFLECT_DEV_ACCOUNT,
   REFLECT_PROD_ACCOUNT,
   REFLECT_STAGING_ACCOUNT,
-} from "./aws-accounts";
-import { CodeConveyorStage } from "./codeconveyor-stage";
+} from "./AwsAccounts";
+import { CodeConveyorStage } from "./CodeConveyorStage";
 import {
   DevEnvironmentSettings,
   ProdEnvironmentSettings,
   StagingEnvironmentSettings,
-} from "./environment-settings";
+} from "./EnvironmentSettings";
 
 export class PipelineStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {

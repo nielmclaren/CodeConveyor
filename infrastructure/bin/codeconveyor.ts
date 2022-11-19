@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as cdk from "aws-cdk-lib";
-import { REFLECT_CI_ACCOUNT } from "../lib/aws-accounts";
-import { PipelineStack } from "../lib/pipeline-stack";
+import { REFLECT_CI_ACCOUNT } from "../lib/AwsAccounts";
+import { PipelineStack } from "../lib/PipelineStack";
 
 const app = new cdk.App();
 new PipelineStack(app, "PipelineStack", {

@@ -1,7 +1,7 @@
 import { CfnOutput, Stage, StageProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { CodeConveyorStack } from "./codeconveyor-stack";
-import { IEnvironmentSettings } from "./environment-settings";
+import { CodeConveyorStack } from "./CodeConveyorStack";
+import { IEnvironmentSettings } from "./EnvironmentSettings";
 
 export class CodeConveyorStage extends Stage {
   public readonly urlOutput: CfnOutput;

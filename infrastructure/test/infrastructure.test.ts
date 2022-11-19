@@ -1,7 +1,7 @@
 import * as cdk from "aws-cdk-lib";
 import { Template, Match } from "aws-cdk-lib/assertions";
-import * as CodeConveyor from "../lib/codeconveyor-stack";
-import { DevEnvironmentSettings } from "../lib/environment-settings";
+import * as CodeConveyor from "../lib/CodeConveyorStack";
+import { DevEnvironmentSettings } from "../lib/EnvironmentSettings";
 
 test("SQS Queue and SNS Topic Created", () => {
   const app = new cdk.App();

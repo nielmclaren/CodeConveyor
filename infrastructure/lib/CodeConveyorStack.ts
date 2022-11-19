@@ -11,7 +11,7 @@ import {
   StackProps,
 } from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { IEnvironmentSettings } from "./environment-settings";
+import { IEnvironmentSettings } from "./EnvironmentSettings";
 
 export class CodeConveyorStack extends Stack {
   public readonly urlOutput: CfnOutput;
