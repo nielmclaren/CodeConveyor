@@ -1,22 +1,10 @@
 import * as cdk from "aws-cdk-lib";
 import { SecretValue } from "aws-cdk-lib";
-import {
-  CodePipeline,
-  CodePipelineSource,
-  ShellStep,
-} from "aws-cdk-lib/pipelines";
+import { CodePipeline, CodePipelineSource, ShellStep } from "aws-cdk-lib/pipelines";
 import { Construct } from "constructs";
-import {
-  REFLECT_DEV_ACCOUNT,
-  REFLECT_PROD_ACCOUNT,
-  REFLECT_STAGING_ACCOUNT,
-} from "./AwsAccounts";
+import { REFLECT_DEV_ACCOUNT, REFLECT_PROD_ACCOUNT, REFLECT_STAGING_ACCOUNT } from "./AwsAccounts";
 import { CodeConveyorStage } from "./CodeConveyorStage";
-import {
-  DevEnvironmentSettings,
-  ProdEnvironmentSettings,
-  StagingEnvironmentSettings,
-} from "./EnvironmentSettings";
+import { DevEnvironmentSettings, ProdEnvironmentSettings, StagingEnvironmentSettings } from "./EnvironmentSettings";
 
 export class PipelineStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -30,12 +18,7 @@ export class PipelineStack extends cdk.Stack {
         input: CodePipelineSource.gitHub("nielmclaren/CodeConveyor", "main", {
           authentication: SecretValue.secretsManager("CodeConveyorGithubToken"),
         }),
-        commands: [
-          "cd infrastructure",
-          "yarn install --frozen-lockfile",
-          "yarn build",
-          "npx cdk synth",
-        ],
+        commands: ["cd infrastructure", "yarn install --frozen-lockfile", "yarn build", "npx cdk synth"],
         primaryOutputDirectory: "infrastructure/cdk.out",
       }),
     });
@@ -47,7 +30,7 @@ export class PipelineStack extends cdk.Stack {
     );
 
     pipeline.addStage(
-      new CodeConveyorStage(this, "Stage", new StagingEnvironmentSettings(), {
+      new CodeConveyorStage(this, "Staging", new StagingEnvironmentSettings(), {
         env: { account: REFLECT_STAGING_ACCOUNT, region: "us-west-2" },
       })
     );
