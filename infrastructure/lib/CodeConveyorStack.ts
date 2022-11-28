@@ -38,10 +38,15 @@ export class CodeConveyorStack extends Stack {
       envSettings.certificateArn
     );
 
+    const originUrl = `https://${envSettings.spaDomainName}`;
+
     const hello = new aws_lambda.Function(this, "HelloHandler", {
       runtime: aws_lambda.Runtime.NODEJS_14_X,
       code: aws_lambda.Code.fromAsset("lambda"),
       handler: "hello.handler",
+      environment: {
+        ALLOW_ORIGIN: originUrl,
+      },
     });
 
     const api = new aws_apigateway.LambdaRestApi(this, "CodeConveyorApiEndpoint", {
@@ -51,7 +56,7 @@ export class CodeConveyorStack extends Stack {
         domainName: envSettings.apiDomainName,
       },
       defaultCorsPreflightOptions: {
-        allowOrigins: [`https://${envSettings.spaDomainName}`],
+        allowOrigins: [originUrl],
       },
     });
 
