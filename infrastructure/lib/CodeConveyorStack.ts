@@ -51,7 +51,7 @@ export class CodeConveyorStack extends Stack {
         domainName: envSettings.apiDomainName,
       },
       defaultCorsPreflightOptions: {
-        allowOrigins: [envSettings.spaDomainName],
+        allowOrigins: [`https://${envSettings.spaDomainName}`],
       },
     });
 
