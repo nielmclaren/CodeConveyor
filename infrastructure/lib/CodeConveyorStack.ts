@@ -50,6 +50,9 @@ export class CodeConveyorStack extends Stack {
         certificate,
         domainName: envSettings.apiDomainName,
       },
+      defaultCorsPreflightOptions: {
+        allowOrigins: [envSettings.spaDomainName],
+      },
     });
 
     this.createApiAliasRecord(envSettings, api);

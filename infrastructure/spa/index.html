@@ -11,13 +11,13 @@
         let hyphen = subdomain.indexOf("-");
         let apiSubdomain =
           hyphen >= 0 ? subdomain.substring(0, hyphen) + "-api" + subdomain.substring(hyphen) : subdomain + "-api";
-        let api = apiSubdomain + dotDomain;
+        let api = `https://${apiSubdomain}${dotDomain}`;
         document.getElementById("api").innerHTML = api;
         fetch(api)
           .then((result) => {
             console.log("result");
             console.log(result);
-            document.getElementById("result").innerHTML = result;
+            document.getElementById("result").innerHTML = JSON.stringify(result, null, "  ");
           })
           .catch((error) => {
             console.log("error");
