@@ -4,12 +4,10 @@ exports.handler = async function (event) {
     statusCode: 200,
     headers: {
       "Content-Type": "text/plain",
-      "Access-Control-Allow-Origin": [
+      "Access-Control-Allow-Origin":
         // TODO: Change this to return only the domain of the corresponding environment.
-        "http://codeconveyor-dev.nielmclaren.com",
-        "http://codeconveyor-staging.nielmclaren.com",
-        "http://codeconveyor.nielmclaren.com",
-      ],
+        "https://codeconveyor-dev.nielmclaren.com,https://codeconveyor-staging.nielmclaren.com,https://codeconveyor.nielmclaren.com",
+      Vary: "Origin",
     },
     body: `Hola, Monty! You've hit ${event.path}\n`,
   };
