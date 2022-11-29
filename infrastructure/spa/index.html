@@ -15,10 +15,17 @@
         document.getElementById("api").innerHTML = api;
         fetch(api)
           .then((result) => {
-            const text = result.text();
-            console.log("text");
-            console.log(text);
-            document.getElementById("result").innerHTML = text;
+            result
+              .text()
+              .then((text) => {
+                console.log("text");
+                console.log(text);
+                document.getElementById("result").innerHTML = text;
+              })
+              .catch((error) => {
+                console.log("parse error");
+                console.log(error);
+              });
           })
           .catch((error) => {
             console.log("error");
