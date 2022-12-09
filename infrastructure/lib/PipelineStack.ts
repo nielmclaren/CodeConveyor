@@ -4,18 +4,18 @@ import { SecretValue } from "aws-cdk-lib";
 import { CodePipeline, CodePipelineSource, ShellStep } from "aws-cdk-lib/pipelines";
 import { Construct } from "constructs";
 import { REFLECT_DEV_ACCOUNT, REFLECT_PROD_ACCOUNT, REFLECT_STAGING_ACCOUNT } from "./AwsAccounts";
+import { PipelineStackProps } from "./PipelineStackProps";
 import { CodeConveyorStage } from "./CodeConveyorStage";
 import { DevEnvironmentSettings, ProdEnvironmentSettings, StagingEnvironmentSettings } from "./EnvironmentSettings";
 
 export class PipelineStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: PipelineStackProps) {
     super(scope, id, props);
 
-    const branchName = this.node.tryGetContext("branchName");
-    assert(typeof branchName === "string");
+    const { branchName } = props;
 
-    const pipeline = new CodePipeline(this, "Pipeline", {
-      pipelineName: "CodeConveyorPipeline",
+    const pipeline = new CodePipeline(this, `CodeConveyorPipeline-${branchName}`, {
+      pipelineName: `CodeConveyorPipeline-${branchName}`,
       crossAccountKeys: true,
 
       synth: new ShellStep("Synth", {

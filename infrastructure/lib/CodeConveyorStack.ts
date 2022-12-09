@@ -22,7 +22,7 @@ import { IEnvironmentSettings } from "./EnvironmentSettings";
 export class CodeConveyorStack extends Stack {
   public readonly urlOutput: CfnOutput;
 
-  constructor(scope: Construct, id: string, envSettings: IEnvironmentSettings, props?: StackProps) {
+  constructor(scope: Construct, id: string, envSettings: IEnvironmentSettings, props: StackProps) {
     super(scope, id, props);
 
     const api = this.createApi(envSettings);
