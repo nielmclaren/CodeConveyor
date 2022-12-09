@@ -6,11 +6,7 @@ import { DevEnvironmentSettings } from "../lib/EnvironmentSettings";
 test("SQS Queue and SNS Topic Created", () => {
   const app = new cdk.App();
   // WHEN
-  const stack = new CodeConveyor.CodeConveyorStack(
-    app,
-    "MyTestStack",
-    new DevEnvironmentSettings()
-  );
+  const stack = new CodeConveyor.CodeConveyorStack(app, "MyTestStack", new DevEnvironmentSettings(), {});
   // THEN
 
   // TODO When does this test actually get run?
